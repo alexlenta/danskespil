@@ -1,6 +1,12 @@
 //BOTTOM MENU
-import { TweenMax, Power2, TimelineLite } from "gsap/TweenMax";
-import { timeout } from "q";
+import {
+  TweenMax,
+  Power2,
+  TimelineLite
+} from "gsap/TweenMax";
+import {
+  timeout
+} from "q";
 
 //DATABASE
 
@@ -15,14 +21,14 @@ let personObject = {
 function postData(personObject) {
   const postData = JSON.stringify(personObject);
   fetch(databaseLink, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": "5cea5dcd5f86251ddebe1a94",
-      "cache-control": "no-cache"
-    },
-    body: postData
-  })
+      method: "post",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "x-apikey": "5cea5dcd5f86251ddebe1a94",
+        "cache-control": "no-cache"
+      },
+      body: postData
+    })
     .then(data => data.json())
     .then(data => console.log(data));
 }
@@ -55,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
   elfSpeechAnimation();
 
   playBtn.dataset.status = "clicked";
-  speechBubbleHeader = `Now's your chance to win up to 1000 kroner!`;
+  speechBubbleHeader = `Now's your chance to win up to 1000 kr.!`;
   setTimeout(() => {
     showSpeechBubble();
   }, 600);
@@ -210,14 +216,13 @@ function validateAge(userYear, userMonth, userDay) {
   if (age >= 18) {
     if (!termsCheckbox.checked) return false;
 
-    if ((userDay.length < 2) | (userMonth.length < 2) | (userYear.length < 4)) {
-    } else {
+    if ((userDay.length < 2) | (userMonth.length < 2) | (userYear.length < 4)) {} else {
       playBtn.addEventListener("click", function (e) {
         playStart(e);
       });
     }
 
-    playBtn.value = "START WINNING";
+    playBtn.value = "I AM OVER 18";
   } else {
     // The speech bubble will show
 
@@ -228,7 +233,7 @@ function validateAge(userYear, userMonth, userDay) {
 
     playBtn.disable;
     // TweenMax.to(ageModalDay, 1, {opacity:0})
-    speechBubbleHeader = "Oh no! You have to be over 18 to play Casino.";
+    speechBubbleHeader = "Oh no! You have to be over 18 to play the game.";
     speechBubbleSubHeader = "";
     showSpeechBubble();
   }
@@ -237,8 +242,13 @@ function validateAge(userYear, userMonth, userDay) {
 let elfSpeech = document.querySelector("#elf-speech");
 
 function elfSpeechAnimation() {
-  TweenMax.to(elfSpeech, 0, { opacity: 1, display: "block" });
-  TweenMax.from(elfSpeech, 1, { x: -500 });
+  TweenMax.to(elfSpeech, 0, {
+    opacity: 1,
+    display: "block"
+  });
+  TweenMax.from(elfSpeech, 1, {
+    x: -500
+  });
 }
 
 // let speechBubbleOverlay = document.querySelector(".speech-bubble-overlay");
@@ -255,21 +265,33 @@ function showSpeechBubble() {
   speechBubbleSubHeaderNode.innerHTML = speechBubbleSubHeader;
   console.log("speech bubble shown");
   //rotate elf
-  TweenMax.to(elfSpeech, 0.2, { rotation: -1 });
+  TweenMax.to(elfSpeech, 0.2, {
+    rotation: -1
+  });
   setTimeout(() => {
-    TweenMax.to(elfSpeech, 0.2, { rotation: 2 });
+    TweenMax.to(elfSpeech, 0.2, {
+      rotation: 2
+    });
   }, 200);
   setTimeout(() => {
-    TweenMax.to(elfSpeech, 0.2, { rotation: 0 });
+    TweenMax.to(elfSpeech, 0.2, {
+      rotation: 0
+    });
   }, 401);
 
   //Show bubble
   speechBubble.style.display = "flex";
 
   //Animate bubble
-  TweenMax.to(speechBubble, 1, { opacity: 1 });
-  TweenMax.to(speechBubble, 0, { y: -1000 });
-  TweenMax.to(speechBubble, 1, { y: 0 });
+  TweenMax.to(speechBubble, 1, {
+    opacity: 1
+  });
+  TweenMax.to(speechBubble, 0, {
+    y: -1000
+  });
+  TweenMax.to(speechBubble, 1, {
+    y: 0
+  });
 
   speechBubble.addEventListener("click", hideSpeechBubble);
 }
@@ -278,7 +300,10 @@ function hideSpeechBubble() {
   // TweenMax.to(speechBubbleOverlay, 0, { opacity: 1 });
   // TweenMax.to(speechBubble, 0, { opacity: 1 });
   // TweenMax.to(speechBubbleOverlay, 1, { opacity: 0 });
-  TweenMax.to(speechBubble, 1, { opacity: 0, display: "none" });
+  TweenMax.to(speechBubble, 1, {
+    opacity: 0,
+    display: "none"
+  });
 
   // setTimeout(() => {
   //   // speechBubbleOverlay.style.display = "none";
@@ -352,7 +377,10 @@ numberTickerCTA.addEventListener("click", function (e) {
   // startDescription(e);
   // TweenMax.to(numberTickerPage, 1, { display: "none", x: -1500 });
   hideSpeechBubble();
-  TweenMax.to(ageModal, 0, { display: "grid", opacity: 1 });
+  TweenMax.to(ageModal, 0, {
+    display: "grid",
+    opacity: 1
+  });
   speechBubbleHeader = "Enter your birthday above to start playing.";
   setTimeout(() => {
     showSpeechBubble();
@@ -372,11 +400,18 @@ function startDescription(e) {
     }
   });
 
-  TweenMax.from(gameNameInputPage, 1, { x: 1500 });
-  TweenMax.to(gameNameInputPage, 1, { display: "grid" });
+  TweenMax.from(gameNameInputPage, 1, {
+    x: 1500
+  });
+  TweenMax.to(gameNameInputPage, 1, {
+    display: "grid"
+  });
 
   // Bottom menu slides away
-  TweenMax.to(bottomMenu, 1, { y: 500, display: "none" });
+  TweenMax.to(bottomMenu, 1, {
+    y: 500,
+    display: "none"
+  });
 }
 
 //Code for after description accept is clicked
@@ -384,13 +419,24 @@ const gameDescriptionCTA = document.querySelector(".game-description-cta");
 
 gameDescriptionCTA.addEventListener("click", () => {
   // The game slides out
-  TweenMax.to(gameDescriptionPage, 1, { display: "none", x: -1500 });
-  TweenMax.from(gamePage, 1, { display: "none", x: 1500 });
-  TweenMax.to(gamePage, 1, { display: "grid" });
+  TweenMax.to(gameDescriptionPage, 1, {
+    display: "none",
+    x: -1500
+  });
+  TweenMax.from(gamePage, 1, {
+    display: "none",
+    x: 1500
+  });
+  TweenMax.to(gamePage, 1, {
+    display: "grid"
+  });
 
   hideSpeechBubble();
 
-  TweenMax.to(elfSpeech, 0.5, { opacity: 0, display: "none" });
+  TweenMax.to(elfSpeech, 0.5, {
+    opacity: 0,
+    display: "none"
+  });
   setTimeout(() => {
     elfSpeechAnimation();
   }, 1000);
@@ -404,8 +450,14 @@ const birthdayForm = document.querySelector("#birthday-form");
 //Function below will be run when the playBtn is clicked
 function playStart(e) {
   hideSpeechBubble();
-  TweenMax.to(ageModal, 0, { display: "none", opacity: 0 });
-  TweenMax.to(numberTickerPage, 1, { display: "none", x: -1500 });
+  TweenMax.to(ageModal, 0, {
+    display: "none",
+    opacity: 0
+  });
+  TweenMax.to(numberTickerPage, 1, {
+    display: "none",
+    x: -1500
+  });
   startDescription(e);
 }
 // Code for name input form
@@ -421,9 +473,16 @@ function checkNameInput() {
   } else {
     personObject.Name = nameInput.value;
     console.log(personObject);
-    TweenMax.to(gameNameInputPage, 1, { display: "none", x: -1500 });
-    TweenMax.from(gameDescriptionPage, 1, { x: 1500 });
-    TweenMax.to(gameDescriptionPage, 1, { display: "grid" });
+    TweenMax.to(gameNameInputPage, 1, {
+      display: "none",
+      x: -1500
+    });
+    TweenMax.from(gameDescriptionPage, 1, {
+      x: 1500
+    });
+    TweenMax.to(gameDescriptionPage, 1, {
+      display: "grid"
+    });
   }
 }
 
@@ -553,25 +612,49 @@ function disableCards() {
   if (playerScore === 1) {
     scoreContainer.removeChild(score0);
 
-    TweenMax.to(score100, 0, { display: "block" });
-    TweenMax.from(score100, 1, { y: -1000, x: -100, scale: 6 });
+    TweenMax.to(score100, 0, {
+      display: "block"
+    });
+    TweenMax.from(score100, 1, {
+      y: -1000,
+      x: -100,
+      scale: 6
+    });
     // prizeLvl2.classList.remove("inactive");
     // prizeLvl2.classList.add("active");
   } else if (playerScore === 3) {
     scoreContainer.removeChild(score100);
 
-    TweenMax.to(score250, 0, { display: "block" });
-    TweenMax.from(score250, 1, { y: -1000, x: -100, scale: 6 });
+    TweenMax.to(score250, 0, {
+      display: "block"
+    });
+    TweenMax.from(score250, 1, {
+      y: -1000,
+      x: -100,
+      scale: 6
+    });
   } else if (playerScore === 5) {
     scoreContainer.removeChild(score250);
 
-    TweenMax.to(score500, 0, { display: "block" });
-    TweenMax.from(score500, 1, { y: -1000, x: -100, scale: 6 });
+    TweenMax.to(score500, 0, {
+      display: "block"
+    });
+    TweenMax.from(score500, 1, {
+      y: -1000,
+      x: -100,
+      scale: 6
+    });
   } else if (playerScore === 6) {
     scoreContainer.removeChild(score500);
 
-    TweenMax.to(score1000, 0, { display: "block" });
-    TweenMax.from(score1000, 1, { y: -1000, x: -100, scale: 6 });
+    TweenMax.to(score1000, 0, {
+      display: "block"
+    });
+    TweenMax.from(score1000, 1, {
+      y: -1000,
+      x: -100,
+      scale: 6
+    });
     // TIME OUT FOR EMAIL PAGE
     setTimeout(() => {
       showWinnerFormPage();
@@ -586,34 +669,54 @@ function unflipCards() {
   // REDUCING THE OPACITY WHEN PLAYERS ARE WRONG
   switch (playerWrong) {
     case 1:
-      TweenMax.to(playerHeart1, 0.5, { opacity: 0.5 });
+      TweenMax.to(playerHeart1, 0.5, {
+        opacity: 0.5
+      });
       break;
     case 2:
-      TweenMax.to(playerHeart1, 0.5, { opacity: 0 });
+      TweenMax.to(playerHeart1, 0.5, {
+        opacity: 0
+      });
       break;
     case 3:
-      TweenMax.to(playerHeart2, 0.5, { opacity: 0.5 });
+      TweenMax.to(playerHeart2, 0.5, {
+        opacity: 0.5
+      });
       break;
     case 4:
-      TweenMax.to(playerHeart2, 0.5, { opacity: 0 });
+      TweenMax.to(playerHeart2, 0.5, {
+        opacity: 0
+      });
       break;
     case 5:
-      TweenMax.to(playerHeart3, 0.5, { opacity: 0.5 });
+      TweenMax.to(playerHeart3, 0.5, {
+        opacity: 0.5
+      });
       break;
     case 6:
-      TweenMax.to(playerHeart3, 0.5, { opacity: 0 });
+      TweenMax.to(playerHeart3, 0.5, {
+        opacity: 0
+      });
       break;
     case 7:
-      TweenMax.to(playerHeart4, 0.5, { opacity: 0.5 });
+      TweenMax.to(playerHeart4, 0.5, {
+        opacity: 0.5
+      });
       break;
     case 8:
-      TweenMax.to(playerHeart4, 0.5, { opacity: 0 });
+      TweenMax.to(playerHeart4, 0.5, {
+        opacity: 0
+      });
       break;
     case 9:
-      TweenMax.to(playerHeart5, 0.5, { opacity: 0.5 });
+      TweenMax.to(playerHeart5, 0.5, {
+        opacity: 0.5
+      });
       break;
     case 10:
-      TweenMax.to(playerHeart5, 0.5, { opacity: 0 });
+      TweenMax.to(playerHeart5, 0.5, {
+        opacity: 0
+      });
 
       // SHOWING THE EMAIL FORM IF PLAYERS DONT HAVE ANY MORE HEARTS
       showEmailInput();
@@ -673,18 +776,28 @@ nameInput.addEventListener("input", () => {
 // ELF ANIMATIONS
 
 let elfDescription = document.querySelector("#elf-description");
+
 function elfDescriptionAnimation() {
   setTimeout(() => {
-    TweenMax.to(elfDescription, 0, { opacity: 1 }),
-      TweenMax.from(elfDescription, 1, { x: -1500 });
+    TweenMax.to(elfDescription, 0, {
+        opacity: 1
+      }),
+      TweenMax.from(elfDescription, 1, {
+        x: -1500
+      });
   }, 1000);
 }
 
 let elfNameInput = document.querySelector("#elf-name-input");
+
 function elfNameAnimation() {
   setTimeout(() => {
-    TweenMax.to(elfNameInput, 0, { opacity: 1 }),
-      TweenMax.from(elfNameInput, 1, { x: -1500 });
+    TweenMax.to(elfNameInput, 0, {
+        opacity: 1
+      }),
+      TweenMax.from(elfNameInput, 1, {
+        x: -1500
+      });
   }, 1000);
 }
 
@@ -722,16 +835,19 @@ let emailHeader = document.querySelector(".game-email-input-header");
 
 // SHOWING THE EMAIL FIELD
 function showEmailInput() {
-  if (turnsCounter === 0) {
-  }
+  if (turnsCounter === 0) {}
   speechBubbleHeader = `It really is your lucky day!`;
   setTimeout(() => {
     showSpeechBubble();
   }, 1000);
 
   gameEmailInputPage.style.display = "grid";
-  TweenMax.to(gameEmailInputPage, 1, { opacity: 1 });
-  TweenMax.from(gameEmailInputPage, 1, { y: 2000 });
+  TweenMax.to(gameEmailInputPage, 1, {
+    opacity: 1
+  });
+  TweenMax.from(gameEmailInputPage, 1, {
+    y: 2000
+  });
   // WHEN THE EMAIL INPUT IS ACCEPTED TO CONTINUE, THE USER GETS MORE TURNS
   emailInputCTA.addEventListener("click", () => {
     gameEmailInputPage.style.opacity = "0";
@@ -752,7 +868,9 @@ const gameWinnerFormPage = document.querySelector("#game-winner-form-page");
 
 function showWinnerFormPage() {
   gameWinnerFormPage.style.display = "grid";
-  TweenMax.to(gameWinnerFormPage, 1, { opacity: 1 });
+  TweenMax.to(gameWinnerFormPage, 1, {
+    opacity: 1
+  });
 
   //ADD VALUE FOR NAME
   const finalName = document.querySelector("#name-final");

@@ -1,8 +1,10 @@
 :root {
   // background:filter-gradient(#a48551, #a48551, vertical);
-  background: rgba(164, 182, 203,1);  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, rgba(125, 150, 180,1), rgba(164, 182, 203,1));  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, rgba(125, 150, 180,1) 0%, rgba(164, 182, 203,1) 100%);
+  background: rgba(164, 182, 203, 1);
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, rgba(125, 150, 180, 1), rgba(164, 182, 203, 1));
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(125, 150, 180, 1) 0%, rgba(164, 182, 203, 1) 100%);
   color: white;
 }
 
@@ -12,7 +14,7 @@
 @font-face {
   font-family: 'unicorn_popregular';
   src: url('unicorn_pop-webfont.woff2') format('woff2'),
-       url('unicorn_pop-webfont.woff') format('woff');
+    url('unicorn_pop-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 
@@ -35,7 +37,7 @@ html {
   display: grid;
   justify-items: center;
   align-items: center;
-  margin-top:-15%;
+  margin-top: -15%;
 
   height: 50%;
   width: 80%;
@@ -43,26 +45,25 @@ html {
 
 .number-ticker-content-1 {
   text-align: center;
-
-  font-size: 10vmin;
-  line-height:14  vmin;
+  margin-top: -10%;
+  font-size: 9vmin;
+  line-height: 14 vmin;
 }
 
 .number-ticker-content-2 {
   text-align: center;
   font-size: 5vmin;
 
-  span {
 
-  }
 }
 
-.digit, .number-ticker-currency {
+.digit,
+.number-ticker-currency {
   font-family: 'unicorn_popregular';
-  font-weight:200;
-  color:#fbb03b;
-  -webkit-text-stroke:3px #a67c52;
-  
+  font-weight: 200;
+  color: #fbb03b;
+  -webkit-text-stroke: 3px #a67c52;
+
 }
 
 // Adding kr to the number ticker
@@ -73,7 +74,7 @@ html {
   justify-content: center;
   align-items: center;
   font-weight: 800;
-  
+
 }
 
 .number-ticker-currency {
@@ -112,6 +113,7 @@ html {
   box-shadow: 0 2px 10px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: 0.2s;
+
   &:hover {
     box-shadow: 0 6px 20px 5px rgba(0, 0, 0, 0.2);
     background-color: white;
@@ -121,25 +123,29 @@ html {
 }
 
 .number-ticker-coin {
-  position:fixed;
+  position: fixed;
   bottom: -50%;
   z-index: -1;
   display: none;
-  opacity:0.8;
+  opacity: 0.8;
 }
 
 .number-ticker-coin:nth-child(1) {
   left: 10%;
 }
+
 .number-ticker-coin:nth-child(2) {
   right: 15%;
 }
+
 .number-ticker-coin:nth-child(3) {
   left: 15%;
 }
+
 .number-ticker-coin:nth-child(4) {
   right: 10%;
 }
+
 .number-ticker-coin:nth-child(5) {
   left: 20%;
 }
@@ -150,6 +156,7 @@ html {
     font-size: 5vw;
     width: 60%;
   }
+
   .number-ticker-content-2 {
     font-size: 2.5vw;
     width: 40%;
@@ -175,7 +182,7 @@ html {
     font-size: 6vmin !important;
     width: 100% !important;
   }
-  
+
   .number-ticker-content-2 {
     font-size: 1.5vw;
     width: 100% !important;
@@ -187,6 +194,6 @@ html {
 
   .number-ticker-container {
     width: 60% !important;
-   
+
   }
 }
