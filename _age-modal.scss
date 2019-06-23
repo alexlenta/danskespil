@@ -5,30 +5,23 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: grid;
+  display: none;
+  opacity: 0;
   z-index: 4;
 
   // MODAL STYLING - background  #CAB188
   // background:filter-gradient(#a48551, #a48551, vertical);
-  background: #eacda3; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #d6ae7b,
-    #eacda3
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #d6ae7b,
-    #eacda3
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: #543503;
+  background: rgba(164, 182, 203,1);  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, rgba(125, 150, 180,1), rgba(164, 182, 203,1));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(125, 150, 180,1) 0%, rgba(164, 182, 203,1) 100%);
+  color: #fff;
 
   #age-container {
     width: 80%;
     height: 50%;
     border-radius: 4px;
 
-    background-color: #ecd8be;
+    background: rgba(164, 182, 203,1);
     align-self: center;
     justify-self: center;
     display: grid;
@@ -37,7 +30,7 @@
 
     border-radius: 10px;
 
-    margin-top:-15%;
+    margin-top: -15%;
 
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 
@@ -50,8 +43,8 @@
 
     #description-p {
       text-align: center;
-      font-size:4vmin;
-      align-self:center;
+      font-size: 4vmin;
+      align-self: center;
     }
 
     #description-p-2 {
@@ -75,6 +68,7 @@
         border: none;
         background-color: hsla(0, 0, 1, 0.1);
         text-align: center;
+        color: #fff;
       }
 
       label {
@@ -97,10 +91,28 @@
         grid-column: 3/4;
       }
 
+      .terms-input-container {
+        margin-top: 10px;
+        grid-column: 1/4;
+        display: flex;
+        align-items: center;
+
+        #termsInput {
+          width: 20px;
+          height: 20px;
+          margin-right: 4px;
+        }
+
+        label {
+          margin: 0;
+        }
+      }
+
       ::-webkit-input-placeholder {
         font-size: 18px;
         font-weight: 600;
         padding: 10px;
+        color: #fafafa;
       }
 
       #play-btn {
@@ -183,8 +195,7 @@
 
   #description-p {
     text-align: center;
-    font-size:3vmin !important;
-    align-self:center;
+    font-size: 3vmin !important;
+    align-self: center;
   }
-  
 }

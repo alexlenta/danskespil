@@ -53,10 +53,20 @@ window.addEventListener("DOMContentLoaded", () => {
   // ELF LOADS IN LANDING ANIMATION
   shuffle();
   elfSpeechAnimation();
-  speechBubbleHeader = "Enter your birthday above to start playing.";
+
+  playBtn.dataset.status = "clicked";
+  speechBubbleHeader = `Now's your chance to win up to 1000 kroner!`;
   setTimeout(() => {
     showSpeechBubble();
-  }, 500);
+  }, 600);
+
+  numberTickerCTA.addEventListener("click", () => {
+    let coinArray = document.querySelectorAll(".number-ticker-coin");
+
+    coinArray.forEach(coin => {
+      coin.style.display = "none";
+    });
+  });
 
   burgerIcon.addEventListener("click", () => {
     event.preventDefault();
@@ -70,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
   nameInputCTA.addEventListener("click", checkNameInput);
 
   // AGE MODAL INITIAL EVENT LISTENER TO SEE IF BLANK
-  playBtn.addEventListener("click", function(e) {
+  playBtn.addEventListener("click", function (e) {
     if (!ageModalDay.value) {
       TweenMax.to(ageModalDay, 0, {
         boxShadow: "inset 0px 0px 2px 2px rgba(245,23,19,0.4)"
@@ -93,6 +103,13 @@ window.addEventListener("DOMContentLoaded", () => {
       speechBubbleHeader = "Hey! You forgot to put in your age.";
       showSpeechBubble();
     }
+    if (!termsCheckbox.checked) {
+      TweenMax.to(termsCheckbox, 0, {
+        boxShadow: "inset 0px 0px 2px 2px rgba(245,23,19,0.4)"
+      });
+      speechBubbleHeader = "Hey! You forgot to read and accept the terms.";
+      showSpeechBubble();
+    }
   });
 });
 
@@ -100,6 +117,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const ageModalDay = document.querySelector("#day");
 const ageModalMonth = document.querySelector("#month");
 const ageModalYear = document.querySelector("#year");
+const termsCheckbox = document.querySelector("#termsInput");
 
 //// VALIDATING THE INPUT FOR DAY, MONTH, YEAR
 // Regular expressions, how they should match
@@ -162,6 +180,10 @@ ageModalYear.addEventListener("keypress", e => {
     });
   }
 });
+termsCheckbox.addEventListener("click", () => {
+  validateAge(userYear, userMonth, userDay);
+  addPersonObjectAge();
+});
 
 function addPersonObjectAge() {
   personObject.BirthDate = userYear + userMonth + userDay;
@@ -186,11 +208,11 @@ function validateAge(userYear, userMonth, userDay) {
   }
   // TO DO 1
   if (age >= 18) {
-    // playStart();
+    if (!termsCheckbox.checked) return false;
 
     if ((userDay.length < 2) | (userMonth.length < 2) | (userYear.length < 4)) {
     } else {
-      playBtn.addEventListener("click", function(e) {
+      playBtn.addEventListener("click", function (e) {
         playStart(e);
       });
     }
@@ -199,7 +221,7 @@ function validateAge(userYear, userMonth, userDay) {
   } else {
     // The speech bubble will show
 
-    playBtn.removeEventListener("click", function(e) {
+    playBtn.removeEventListener("click", function (e) {
       playStart(e);
     });
     playBtn.value = "SORRY, TOO YOUNG!";
@@ -326,13 +348,15 @@ const numberTickerCTA = document.querySelector(".number-ticker-cta");
 const numberTicker = document.querySelector(".number-ticker-container");
 const numberTickerPage = document.querySelector("#number-ticker-landing-page");
 
-numberTickerCTA.addEventListener("click", function(e) {
-  startDescription(e);
+numberTickerCTA.addEventListener("click", function (e) {
+  // startDescription(e);
+  // TweenMax.to(numberTickerPage, 1, { display: "none", x: -1500 });
   hideSpeechBubble();
-  // TweenMax.to(elfSpeech,0.5, {display:'none'});
-  TweenMax.to(numberTickerPage, 1, { display: "none", x: -1500 });
-  // Elf Animation
-  //elfDescriptionAnimation();
+  TweenMax.to(ageModal, 0, { display: "grid", opacity: 1 });
+  speechBubbleHeader = "Enter your birthday above to start playing.";
+  setTimeout(() => {
+    showSpeechBubble();
+  }, 1200);
 });
 
 // Storing the game description here
@@ -341,9 +365,15 @@ const gameDescriptionPage = document.querySelector("#game-description-page");
 //Function to run when the start button is clicked, under the number ticker
 function startDescription(e) {
   e.preventDefault();
-  console.log("it should run");
-  TweenMax.from(gameDescriptionPage, 1, { x: 1500 });
-  TweenMax.to(gameDescriptionPage, 1, { display: "grid" });
+
+  document.addEventListener("keydown", event => {
+    if (event.key == "Enter") {
+      checkNameInput();
+    }
+  });
+
+  TweenMax.from(gameNameInputPage, 1, { x: 1500 });
+  TweenMax.to(gameNameInputPage, 1, { display: "grid" });
 
   // Bottom menu slides away
   TweenMax.to(bottomMenu, 1, { y: 500, display: "none" });
@@ -354,19 +384,16 @@ const gameDescriptionCTA = document.querySelector(".game-description-cta");
 
 gameDescriptionCTA.addEventListener("click", () => {
   // The game slides out
-  // TweenMax.from(gamePage, 1, { x: 1500 });
-  // TweenMax.to(gamePage, 1, { display: "grid" });
-  TweenMax.from(gameNameInputPage, 1, { x: 1500 });
-  TweenMax.to(gameNameInputPage, 1, { display: "grid" });
-
-  document.addEventListener("keydown", event => {
-    if (event.key == "Enter") {
-      checkNameInput();
-    }
-  });
   TweenMax.to(gameDescriptionPage, 1, { display: "none", x: -1500 });
+  TweenMax.from(gamePage, 1, { display: "none", x: 1500 });
+  TweenMax.to(gamePage, 1, { display: "grid" });
 
-  //elfNameAnimation();
+  hideSpeechBubble();
+
+  TweenMax.to(elfSpeech, 0.5, { opacity: 0, display: "none" });
+  setTimeout(() => {
+    elfSpeechAnimation();
+  }, 1000);
 });
 
 // Code for the birthday input form
@@ -376,26 +403,10 @@ const birthdayForm = document.querySelector("#birthday-form");
 
 //Function below will be run when the playBtn is clicked
 function playStart(e) {
-  //console.log("play button clicked");
-
-  TweenMax.to(ageModal, 0, { opacity: 0, display: "none" });
   hideSpeechBubble();
-  //TweenMax.to(elfSpeech, 0, { opacity: 0, display: "none" });
-  playBtn.dataset.status = "clicked";
-  speechBubbleHeader = `Now's your chance to win up to 1000 kroner!`;
-  setTimeout(() => {
-    showSpeechBubble();
-  }, 1200);
-
-  numberTickerCTA.addEventListener("click", () => {
-    let coinArray = document.querySelectorAll(".number-ticker-coin");
-
-    coinArray.forEach(coin => {
-      coin.style.display = "none";
-    });
-  });
-
-  // Preventing the page from reloading
+  TweenMax.to(ageModal, 0, { display: "none", opacity: 0 });
+  TweenMax.to(numberTickerPage, 1, { display: "none", x: -1500 });
+  startDescription(e);
 }
 // Code for name input form
 
@@ -411,14 +422,8 @@ function checkNameInput() {
     personObject.Name = nameInput.value;
     console.log(personObject);
     TweenMax.to(gameNameInputPage, 1, { display: "none", x: -1500 });
-    TweenMax.from(gamePage, 1, { display: "none", x: 1500 });
-    TweenMax.to(gamePage, 1, { display: "grid" });
-    hideSpeechBubble();
-    7;
-    TweenMax.to(elfSpeech, 0.5, { opacity: 0, display: "none" });
-    setTimeout(() => {
-      elfSpeechAnimation();
-    }, 1000);
+    TweenMax.from(gameDescriptionPage, 1, { x: 1500 });
+    TweenMax.to(gameDescriptionPage, 1, { display: "grid" });
   }
 }
 
